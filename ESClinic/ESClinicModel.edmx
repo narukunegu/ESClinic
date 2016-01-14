@@ -1,0 +1,938 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EsClinicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClinicInfoes">
+          <Key>
+            <PropertyRef Name="ClinicId" />
+          </Key>
+          <Property Name="ClinicId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Logo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Diagnoses">
+          <Key>
+            <PropertyRef Name="DiagnoseId" />
+          </Key>
+          <Property Name="DiagnoseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Drugs">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Days" Type="int" Nullable="false" />
+          <Property Name="Morning" Type="float" Nullable="false" />
+          <Property Name="Noon" Type="float" Nullable="false" />
+          <Property Name="Afternoon" Type="float" Nullable="false" />
+          <Property Name="Night" Type="float" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EndoscopyPhotoes">
+          <Key>
+            <PropertyRef Name="EndoscopyPhotoId" />
+          </Key>
+          <Property Name="EndoscopyPhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="EndoscopyRecordId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EndoscopyRecords">
+          <Key>
+            <PropertyRef Name="EndoscopyRecordId" />
+          </Key>
+          <Property Name="EndoscopyRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Result" Type="nvarchar(max)" />
+          <Property Name="EndoscopyTypeId" Type="int" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EndoscopyTypes">
+          <Key>
+            <PropertyRef Name="EndoScopyTypeId" />
+          </Key>
+          <Property Name="EndoScopyTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Pattern" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Birthday" Type="nvarchar(max)" />
+          <Property Name="Sex" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Payors">
+          <Key>
+            <PropertyRef Name="PayorId" />
+          </Key>
+          <Property Name="PayorId" Type="int" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="100" />
+          <Property Name="GenericDrug" Type="nvarchar" MaxLength="100" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="Exp" Type="datetime" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsChecked" Type="bit" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceTypes">
+          <Key>
+            <PropertyRef Name="ServiceTypeId" />
+          </Key>
+          <Property Name="ServiceTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Symtoms" Type="nvarchar(max)" />
+          <Property Name="Diagnose" Type="nvarchar(max)" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="ReExamDate" Type="datetime" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="DoctorName" Type="nvarchar(max)" />
+          <Property Name="Stage" Type="nvarchar(max)" />
+          <Property Name="DrugNote" Type="nvarchar(max)" />
+          <Property Name="DrugCost" Type="int" />
+          <Property Name="ServiceCost" Type="int" />
+          <Property Name="TotalCost" Type="int" />
+          <Property Name="Fare" Type="int" />
+          <Property Name="Change" Type="int" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Surcharges">
+          <Key>
+            <PropertyRef Name="SurchargeId" />
+          </Key>
+          <Property Name="SurchargeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDoctor" Type="bit" Nullable="false" />
+          <Property Name="ExaminationAccessible" Type="bit" Nullable="false" />
+          <Property Name="PaymentAccessible" Type="bit" Nullable="false" />
+          <Property Name="ManagementAccessible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visitors">
+          <Key>
+            <PropertyRef Name="VisitorId" />
+          </Key>
+          <Property Name="VisitorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="Stage" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_Drugs_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drugs" Type="Self.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Drugs_dbo_Sessions_SessionId">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drugs" Type="Self.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId">
+          <End Role="EndoscopyRecords" Type="Self.EndoscopyRecords" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EndoscopyPhotoes" Type="Self.EndoscopyPhotoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndoscopyRecords">
+              <PropertyRef Name="EndoscopyRecordId" />
+            </Principal>
+            <Dependent Role="EndoscopyPhotoes">
+              <PropertyRef Name="EndoscopyRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId">
+          <End Role="EndoscopyTypes" Type="Self.EndoscopyTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EndoscopyRecords" Type="Self.EndoscopyRecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndoscopyTypes">
+              <PropertyRef Name="EndoScopyTypeId" />
+            </Principal>
+            <Dependent Role="EndoscopyRecords">
+              <PropertyRef Name="EndoscopyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EndoscopyRecords" Type="Self.EndoscopyRecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="EndoscopyRecords">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payors_dbo_Sessions_PayorId">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="Payors" Type="Self.Payors" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Payors">
+              <PropertyRef Name="PayorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId">
+          <End Role="ServiceTypes" Type="Self.ServiceTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Services" Type="Self.Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTypes">
+              <PropertyRef Name="ServiceTypeId" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="ServiceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Services_dbo_Sessions_SessionId">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Services" Type="Self.Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sessions_dbo_Patients_PatientId">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Visitors_dbo_Patients_PatientId">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Visitors" Type="Self.Visitors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Visitors">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EsClinicModelStoreContainer">
+          <EntitySet Name="ClinicInfoes" EntityType="Self.ClinicInfoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EndoscopyPhotoes" EntityType="Self.EndoscopyPhotoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EndoscopyRecords" EntityType="Self.EndoscopyRecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EndoscopyTypes" EntityType="Self.EndoscopyTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payors" EntityType="Self.Payors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Surcharges" EntityType="Self.Surcharges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visitors" EntityType="Self.Visitors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Drugs_dbo_Products_ProductId" Association="Self.FK_dbo_Drugs_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Drugs_dbo_Sessions_SessionId" Association="Self.FK_dbo_Drugs_dbo_Sessions_SessionId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId" Association="Self.FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId">
+            <End Role="EndoscopyRecords" EntitySet="EndoscopyRecords" />
+            <End Role="EndoscopyPhotoes" EntitySet="EndoscopyPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId" Association="Self.FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId">
+            <End Role="EndoscopyTypes" EntitySet="EndoscopyTypes" />
+            <End Role="EndoscopyRecords" EntitySet="EndoscopyRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId" Association="Self.FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="EndoscopyRecords" EntitySet="EndoscopyRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payors_dbo_Sessions_PayorId" Association="Self.FK_dbo_Payors_dbo_Sessions_PayorId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Payors" EntitySet="Payors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId" Association="Self.FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId">
+            <End Role="ServiceTypes" EntitySet="ServiceTypes" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Services_dbo_Sessions_SessionId" Association="Self.FK_dbo_Services_dbo_Sessions_SessionId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sessions_dbo_Patients_PatientId" Association="Self.FK_dbo_Sessions_dbo_Patients_PatientId">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Visitors_dbo_Patients_PatientId" Association="Self.FK_dbo_Visitors_dbo_Patients_PatientId">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Visitors" EntitySet="Visitors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EsClinicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClinicInfo">
+          <Key>
+            <PropertyRef Name="ClinicId" />
+          </Key>
+          <Property Name="ClinicId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Diagnosis">
+          <Key>
+            <PropertyRef Name="DiagnoseId" />
+          </Key>
+          <Property Name="DiagnoseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Days" Type="Int32" Nullable="false" />
+          <Property Name="Morning" Type="Double" Nullable="false" />
+          <Property Name="Noon" Type="Double" Nullable="false" />
+          <Property Name="Afternoon" Type="Double" Nullable="false" />
+          <Property Name="Night" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_Drugs_dbo_Products_ProductId" FromRole="Drugs" ToRole="Products" />
+          <NavigationProperty Name="Session" Relationship="Self.FK_dbo_Drugs_dbo_Sessions_SessionId" FromRole="Drugs" ToRole="Sessions" />
+        </EntityType>
+        <EntityType Name="EndoscopyPhoto">
+          <Key>
+            <PropertyRef Name="EndoscopyPhotoId" />
+          </Key>
+          <Property Name="EndoscopyPhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="EndoscopyRecordId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EndoscopyRecord" Relationship="Self.FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId" FromRole="EndoscopyPhotoes" ToRole="EndoscopyRecords" />
+        </EntityType>
+        <EntityType Name="EndoscopyRecord">
+          <Key>
+            <PropertyRef Name="EndoscopyRecordId" />
+          </Key>
+          <Property Name="EndoscopyRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EndoscopyTypeId" Type="Int32" Nullable="false" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EndoscopyPhotoes" Relationship="Self.FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId" FromRole="EndoscopyRecords" ToRole="EndoscopyPhotoes" />
+          <NavigationProperty Name="EndoscopyType" Relationship="Self.FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId" FromRole="EndoscopyRecords" ToRole="EndoscopyTypes" />
+          <NavigationProperty Name="Session" Relationship="Self.FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId" FromRole="EndoscopyRecords" ToRole="Sessions" />
+        </EntityType>
+        <EntityType Name="EndoscopyType">
+          <Key>
+            <PropertyRef Name="EndoScopyTypeId" />
+          </Key>
+          <Property Name="EndoScopyTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pattern" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EndoscopyRecords" Relationship="Self.FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId" FromRole="EndoscopyTypes" ToRole="EndoscopyRecords" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sessions" Relationship="Self.FK_dbo_Sessions_dbo_Patients_PatientId" FromRole="Patients" ToRole="Sessions" />
+          <NavigationProperty Name="Visitors" Relationship="Self.FK_dbo_Visitors_dbo_Patients_PatientId" FromRole="Patients" ToRole="Visitors" />
+        </EntityType>
+        <EntityType Name="Payor">
+          <Key>
+            <PropertyRef Name="PayorId" />
+          </Key>
+          <Property Name="PayorId" Type="Int32" Nullable="false" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Session" Relationship="Self.FK_dbo_Payors_dbo_Sessions_PayorId" FromRole="Payors" ToRole="Sessions" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GenericDrug" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Exp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drugs" Relationship="Self.FK_dbo_Drugs_dbo_Products_ProductId" FromRole="Products" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsChecked" Type="Boolean" Nullable="false" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceType" Relationship="Self.FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId" FromRole="Services" ToRole="ServiceTypes" />
+          <NavigationProperty Name="Session" Relationship="Self.FK_dbo_Services_dbo_Sessions_SessionId" FromRole="Services" ToRole="Sessions" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="ServiceTypeId" />
+          </Key>
+          <Property Name="ServiceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId" FromRole="ServiceTypes" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Symtoms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Diagnose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReExamDate" Type="DateTime" Precision="3" />
+          <Property Name="DoctorId" Type="Int32" />
+          <Property Name="DoctorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Stage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DrugNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DrugCost" Type="Int32" />
+          <Property Name="ServiceCost" Type="Int32" />
+          <Property Name="TotalCost" Type="Int32" />
+          <Property Name="Fare" Type="Int32" />
+          <Property Name="Change" Type="Int32" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drugs" Relationship="Self.FK_dbo_Drugs_dbo_Sessions_SessionId" FromRole="Sessions" ToRole="Drugs" />
+          <NavigationProperty Name="EndoscopyRecords" Relationship="Self.FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId" FromRole="Sessions" ToRole="EndoscopyRecords" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_dbo_Sessions_dbo_Patients_PatientId" FromRole="Sessions" ToRole="Patients" />
+          <NavigationProperty Name="Payor" Relationship="Self.FK_dbo_Payors_dbo_Sessions_PayorId" FromRole="Sessions" ToRole="Payors" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_dbo_Services_dbo_Sessions_SessionId" FromRole="Sessions" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Surcharge">
+          <Key>
+            <PropertyRef Name="SurchargeId" />
+          </Key>
+          <Property Name="SurchargeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsDoctor" Type="Boolean" Nullable="false" />
+          <Property Name="ExaminationAccessible" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentAccessible" Type="Boolean" Nullable="false" />
+          <Property Name="ManagementAccessible" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visitor">
+          <Key>
+            <PropertyRef Name="VisitorId" />
+          </Key>
+          <Property Name="VisitorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="Stage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_dbo_Visitors_dbo_Patients_PatientId" FromRole="Visitors" ToRole="Patients" />
+        </EntityType>
+        <Association Name="FK_dbo_Drugs_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drugs" Type="Self.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Drugs_dbo_Sessions_SessionId">
+          <End Role="Sessions" Type="Self.Session" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drugs" Type="Self.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId">
+          <End Role="EndoscopyRecords" Type="Self.EndoscopyRecord" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EndoscopyPhotoes" Type="Self.EndoscopyPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndoscopyRecords">
+              <PropertyRef Name="EndoscopyRecordId" />
+            </Principal>
+            <Dependent Role="EndoscopyPhotoes">
+              <PropertyRef Name="EndoscopyRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId">
+          <End Role="EndoscopyTypes" Type="Self.EndoscopyType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EndoscopyRecords" Type="Self.EndoscopyRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndoscopyTypes">
+              <PropertyRef Name="EndoScopyTypeId" />
+            </Principal>
+            <Dependent Role="EndoscopyRecords">
+              <PropertyRef Name="EndoscopyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId">
+          <End Role="Sessions" Type="Self.Session" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EndoscopyRecords" Type="Self.EndoscopyRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="EndoscopyRecords">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sessions_dbo_Patients_PatientId">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sessions" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Visitors_dbo_Patients_PatientId">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Visitors" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Visitors">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payors_dbo_Sessions_PayorId">
+          <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+          <End Role="Payors" Type="Self.Payor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Payors">
+              <PropertyRef Name="PayorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId">
+          <End Role="ServiceTypes" Type="Self.ServiceType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Services" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTypes">
+              <PropertyRef Name="ServiceTypeId" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="ServiceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Services_dbo_Sessions_SessionId">
+          <End Role="Sessions" Type="Self.Session" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Services" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EsClinicEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClinicInfoes" EntityType="Self.ClinicInfo" />
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnosis" />
+          <EntitySet Name="Drugs" EntityType="Self.Drug" />
+          <EntitySet Name="EndoscopyPhotoes" EntityType="Self.EndoscopyPhoto" />
+          <EntitySet Name="EndoscopyRecords" EntityType="Self.EndoscopyRecord" />
+          <EntitySet Name="EndoscopyTypes" EntityType="Self.EndoscopyType" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Payors" EntityType="Self.Payor" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="ServiceTypes" EntityType="Self.ServiceType" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="Surcharges" EntityType="Self.Surcharge" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Visitors" EntityType="Self.Visitor" />
+          <AssociationSet Name="FK_dbo_Drugs_dbo_Products_ProductId" Association="Self.FK_dbo_Drugs_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Drugs_dbo_Sessions_SessionId" Association="Self.FK_dbo_Drugs_dbo_Sessions_SessionId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId" Association="Self.FK_dbo_EndoscopyPhotoes_dbo_EndoscopyRecords_EndoscopyRecordId">
+            <End Role="EndoscopyRecords" EntitySet="EndoscopyRecords" />
+            <End Role="EndoscopyPhotoes" EntitySet="EndoscopyPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId" Association="Self.FK_dbo_EndoscopyRecords_dbo_EndoscopyTypes_EndoscopyTypeId">
+            <End Role="EndoscopyTypes" EntitySet="EndoscopyTypes" />
+            <End Role="EndoscopyRecords" EntitySet="EndoscopyRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId" Association="Self.FK_dbo_EndoscopyRecords_dbo_Sessions_SessionId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="EndoscopyRecords" EntitySet="EndoscopyRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sessions_dbo_Patients_PatientId" Association="Self.FK_dbo_Sessions_dbo_Patients_PatientId">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Visitors_dbo_Patients_PatientId" Association="Self.FK_dbo_Visitors_dbo_Patients_PatientId">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Visitors" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payors_dbo_Sessions_PayorId" Association="Self.FK_dbo_Payors_dbo_Sessions_PayorId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Payors" EntitySet="Payors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId" Association="Self.FK_dbo_Services_dbo_ServiceTypes_ServiceTypeId">
+            <End Role="ServiceTypes" EntitySet="ServiceTypes" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Services_dbo_Sessions_SessionId" Association="Self.FK_dbo_Services_dbo_Sessions_SessionId">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EsClinicModelStoreContainer" CdmEntityContainer="EsClinicEntities">
+          <EntitySetMapping Name="ClinicInfoes">
+            <EntityTypeMapping TypeName="EsClinicModel.ClinicInfo">
+              <MappingFragment StoreEntitySet="ClinicInfoes">
+                <ScalarProperty Name="ClinicId" ColumnName="ClinicId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnoses">
+            <EntityTypeMapping TypeName="EsClinicModel.Diagnosis">
+              <MappingFragment StoreEntitySet="Diagnoses">
+                <ScalarProperty Name="DiagnoseId" ColumnName="DiagnoseId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drugs">
+            <EntityTypeMapping TypeName="EsClinicModel.Drug">
+              <MappingFragment StoreEntitySet="Drugs">
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="Morning" ColumnName="Morning" />
+                <ScalarProperty Name="Noon" ColumnName="Noon" />
+                <ScalarProperty Name="Afternoon" ColumnName="Afternoon" />
+                <ScalarProperty Name="Night" ColumnName="Night" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndoscopyPhotoes">
+            <EntityTypeMapping TypeName="EsClinicModel.EndoscopyPhoto">
+              <MappingFragment StoreEntitySet="EndoscopyPhotoes">
+                <ScalarProperty Name="EndoscopyPhotoId" ColumnName="EndoscopyPhotoId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="EndoscopyRecordId" ColumnName="EndoscopyRecordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndoscopyRecords">
+            <EntityTypeMapping TypeName="EsClinicModel.EndoscopyRecord">
+              <MappingFragment StoreEntitySet="EndoscopyRecords">
+                <ScalarProperty Name="EndoscopyRecordId" ColumnName="EndoscopyRecordId" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="EndoscopyTypeId" ColumnName="EndoscopyTypeId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndoscopyTypes">
+            <EntityTypeMapping TypeName="EsClinicModel.EndoscopyType">
+              <MappingFragment StoreEntitySet="EndoscopyTypes">
+                <ScalarProperty Name="EndoScopyTypeId" ColumnName="EndoScopyTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pattern" ColumnName="Pattern" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="EsClinicModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payors">
+            <EntityTypeMapping TypeName="EsClinicModel.Payor">
+              <MappingFragment StoreEntitySet="Payors">
+                <ScalarProperty Name="PayorId" ColumnName="PayorId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="EsClinicModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="GenericDrug" ColumnName="GenericDrug" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="EsClinicModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceTypes">
+            <EntityTypeMapping TypeName="EsClinicModel.ServiceType">
+              <MappingFragment StoreEntitySet="ServiceTypes">
+                <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="EsClinicModel.Session">
+              <MappingFragment StoreEntitySet="Sessions">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Symtoms" ColumnName="Symtoms" />
+                <ScalarProperty Name="Diagnose" ColumnName="Diagnose" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ReExamDate" ColumnName="ReExamDate" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="DrugNote" ColumnName="DrugNote" />
+                <ScalarProperty Name="DrugCost" ColumnName="DrugCost" />
+                <ScalarProperty Name="ServiceCost" ColumnName="ServiceCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Fare" ColumnName="Fare" />
+                <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surcharges">
+            <EntityTypeMapping TypeName="EsClinicModel.Surcharge">
+              <MappingFragment StoreEntitySet="Surcharges">
+                <ScalarProperty Name="SurchargeId" ColumnName="SurchargeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EsClinicModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsDoctor" ColumnName="IsDoctor" />
+                <ScalarProperty Name="ExaminationAccessible" ColumnName="ExaminationAccessible" />
+                <ScalarProperty Name="PaymentAccessible" ColumnName="PaymentAccessible" />
+                <ScalarProperty Name="ManagementAccessible" ColumnName="ManagementAccessible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visitors">
+            <EntityTypeMapping TypeName="EsClinicModel.Visitor">
+              <MappingFragment StoreEntitySet="Visitors">
+                <ScalarProperty Name="VisitorId" ColumnName="VisitorId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

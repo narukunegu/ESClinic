@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="ESClinic.Views.ClinicInfoManageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0"
+                  Height="300"
+                  Margin="50,50,50,20"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Top"
+                  Header="Thông tin phòng khám">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4cm" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="ClinicName"
+                             Grid.Row="0"
+                             Grid.Column="0"
+                             Margin="10,0"
+                             VerticalAlignment="Center"
+                             FontSize="50"
+                             Text="Phòng Khám" />
+                    <TextBox x:Name="ClinicAddress"
+                             Grid.Row="1"
+                             Grid.Column="0"
+                             Margin="10,0"
+                             VerticalAlignment="Center"
+                             FontSize="20"
+                             Text="Địa chỉ : " />
+                    <TextBox x:Name="ClinicPhone"
+                             Grid.Row="2"
+                             Grid.Column="0"
+                             Margin="10,0"
+                             VerticalAlignment="Center"
+                             FontSize="20"
+                             Text="Phone : " />
+                </Grid>
+                <Image Grid.Column="1"
+                       Width="150"
+                       Height="150"
+                       Margin="0,5,0,0"
+                       VerticalAlignment="Top"
+                       Source="{Binding LogoImg}"
+                       Stretch="Fill">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <cal:ActionMessage MethodName="LoadImage" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+            </Grid>
+        </GroupBox>
+        <Button x:Name="Save"
+                Grid.Row="1"
+                Width="100"
+                Margin="50,0"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="20" Height="20">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Save.png" Stretch="UniformToFill" />
+                    </Grid.Background>
+                </Grid>
+                <TextBlock Margin="2,0"
+                           VerticalAlignment="Center"
+                           Text="Lưu" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>

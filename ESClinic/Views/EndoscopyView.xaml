@@ -1,0 +1,242 @@
+﻿<Window x:Class="ESClinic.Views.EndoscopyView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        cal:Message.Attach="[Event Closed] = [Action StopPreview]">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        Margin="10,0"
+                        Orientation="Horizontal">
+                <Menu Width="Auto" VerticalAlignment="Center">
+                    <MenuItem Header="Tùy chọn" IsEnabled="{Binding IsEnabledScopy}">
+                        <MenuItem Header="Video input"
+                                  ItemsSource="{Binding Cameras}"
+                                  cal:Message.Attach="SelectCamera($orignalsourcecontext)" />
+                        <MenuItem Header="COM input" />
+                        <MenuItem Header="Thiết lập" cal:Message.Attach="VideoSetting" />
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Margin="10,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                <Button x:Name="Finished"
+                        Width="120"
+                        Height="40"
+                        HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Width="20" Height="20">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Submit-01.png" Stretch="UniformToFill" />
+                            </Grid.Background>
+                        </Grid>
+                        <TextBlock Margin="2,0"
+                                   VerticalAlignment="Center"
+                                   Text="Mới" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Grid.Column="0" Header="Ảnh nọi soi">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                        <Button x:Name="SelectAllPhotos"
+                                Width="100"
+                                Height="40"
+                                Margin="5,0"
+                                HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Width="20" Height="20">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Check-Box.png" Stretch="UniformToFill" />
+                                    </Grid.Background>
+                                </Grid>
+                                <TextBlock Margin="2,0"
+                                           VerticalAlignment="Center"
+                                           Text="Chọn hết" />
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="SelectPhotos"
+                                Width="100"
+                                Height="40"
+                                HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Width="20" Height="20">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Save.png" Stretch="UniformToFill" />
+                                    </Grid.Background>
+                                </Grid>
+                                <TextBlock Margin="2,0"
+                                           VerticalAlignment="Center"
+                                           Text="Lưu" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Photos}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Width="250"
+                                           Source="{Binding Photo}"
+                                           Stretch="Fill" />
+                                    <CheckBox Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              IsChecked="{Binding IsChecked}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Column="1">
+                <TabControl controls:TabControlHelper.IsUnderlined="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <cal:ActionMessage MethodName="TabControl" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <TabItem Header="Nội soi" IsEnabled="{Binding IsEnabledScopy}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Label Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       Content="Rộng:" />
+                                <TextBox Width="60" VerticalAlignment="Center" />
+                                <Label Margin="15,0"
+                                       VerticalAlignment="Center"
+                                       Content="Cao:" />
+                                <TextBox Width="60" VerticalAlignment="Center" />
+
+                                <Button x:Name="Capture"
+                                        Width="120"
+                                        Height="40"
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Right">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid Width="20" Height="20">
+                                            <Grid.Background>
+                                                <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Camera -01.png" Stretch="UniformToFill" />
+                                            </Grid.Background>
+                                        </Grid>
+                                        <TextBlock Margin="2,0"
+                                                   VerticalAlignment="Center"
+                                                   Text="Chụp" />
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+                            <Image x:Name="ImgVideo"
+                                   Grid.Row="1"
+                                   Stretch="Fill">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Loaded">
+                                        <cal:ActionMessage MethodName="LoadControl">
+                                            <cal:Parameter Value="{Binding ElementName=ImgVideo}" />
+                                        </cal:ActionMessage>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                            </Image>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Kết quả"
+                             IsSelected="{Binding IsSelectedResult}"
+                             ToolTip="Kết thúc chụp nội soi.">
+                        <Grid Margin="0,1,0,-1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Label Margin="10,0"
+                                           VerticalAlignment="Center"
+                                           Content="Mục thực hiện" />
+                                    <ComboBox Width="200"
+                                              VerticalAlignment="Center"
+                                              DisplayMemberPath="Name"
+                                              ItemsSource="{Binding EsTypes}"
+                                              SelectedItem="{Binding SelectedEsType}"
+                                              ToolTip="Thay đổi lựa chọn sẽ thay đổi kết quả.">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <cal:ActionMessage MethodName="EsTypeChanged" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1"
+                                            Margin="10,0"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                    <Button x:Name="SaveEsResult"
+                                            Width="80"
+                                            Height="40"
+                                            HorizontalAlignment="Right"
+                                            Visibility="Hidden">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="5,0,5,0" Content="Lưu" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <TextBox x:Name="EsTypePattern"
+                                     Grid.Row="1"
+                                     Margin="5"
+                                     AcceptsReturn="True"
+                                     HorizontalScrollBarVisibility="Disabled"
+                                     TextWrapping="WrapWithOverflow"
+                                     VerticalScrollBarVisibility="Auto" />
+                        </Grid>
+                    </TabItem>
+
+                </TabControl>
+
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>

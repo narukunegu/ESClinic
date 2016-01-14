@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="ESClinic.Views.ImportProductsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:controls="clr-namespace:FeserWard.Controls;assembly=Intellibox"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Margin="10,5"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Label x:Name="Stage"
+                   Margin="10"
+                   VerticalAlignment="Center"
+                   FontWeight="Bold" />
+            <Button x:Name="SaveDrugs"
+                    Width="100"
+                    Height="40">
+                <StackPanel Orientation="Horizontal">
+                    <Grid Width="20" Height="20">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Save.png" Stretch="UniformToFill" />
+                        </Grid.Background>
+                    </Grid>
+                    <TextBlock Margin="2,0"
+                               VerticalAlignment="Center"
+                               Text="Lưu" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <GroupBox Grid.Row="1" Header="Danh sách nhập">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="0,0,10,0"
+                           HorizontalAlignment="Center"
+                           Content="Biệt dược" />
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="0,0,10,0"
+                           HorizontalAlignment="Center"
+                           Content="Ngày hết hạn" />
+                    <Label Grid.Row="0"
+                           Grid.Column="2"
+                           Margin="0,0,10,0"
+                           HorizontalAlignment="Center"
+                           Content="Số lượng nhập" />
+                    <Label Grid.Row="0"
+                           Grid.Column="3"
+                           Margin="0,0,10,0"
+                           HorizontalAlignment="Center"
+                           Content="Giá bán" />
+
+                    <controls:Intellibox x:Name="ProductName"
+                                         Grid.Row="1"
+                                         Grid.Column="0"
+                                         Width="200"
+                                         VerticalAlignment="Center"
+                                         VerticalContentAlignment="Center"
+                                         DataProvider="{Binding ProductResultsProvider}"
+                                         DisplayedValueBinding="{Binding BrandName}"
+                                         ExplicitlyIncludeColumns="True"
+                                         SelectedValue="{Binding SelectedProductId}"
+                                         SelectedValueBinding="{Binding ProductId}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="KeyDown">
+                                <cal:ActionMessage MethodName="IntelboxEnterPressed">
+                                    <cal:Parameter Value="$eventArgs" />
+                                </cal:ActionMessage>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <cal:ActionMessage MethodName="ProductSelectCompleted" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <controls:Intellibox.Columns>
+                            <controls:IntelliboxColumn DisplayMemberBinding="{Binding BrandName}" Header="Tên thuốc" />
+                            <controls:IntelliboxColumn DisplayMemberBinding="{Binding GenericDrug}" Header="Hoạt chất" />
+                            <controls:IntelliboxColumn DisplayMemberBinding="{Binding Type}" Header="ĐVT" />
+                            <controls:IntelliboxColumn DisplayMemberBinding="{Binding Price}" Header="Giá" />
+                            <controls:IntelliboxColumn DisplayMemberBinding="{Binding Quantity}" Header="Tồn kho" />
+                        </controls:Intellibox.Columns>
+                    </controls:Intellibox>
+
+                    <DatePicker Grid.Row="1"
+                                Grid.Column="1"
+                                Width="120"
+                                Margin="1,5"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                SelectedDate="{Binding Exp,
+                                                       StringFormat={}{0:dd/MM/yyyy}}" />
+
+                    <TextBox x:Name="Quantity"
+                             Grid.Row="1"
+                             Grid.Column="2"
+                             Width="100"
+                             Margin="1,5"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center" />
+
+                    <TextBox x:Name="Price"
+                             Grid.Row="1"
+                             Grid.Column="3"
+                             Width="100"
+                             Margin="1,5"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center" />
+
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="4"
+                                Margin="1,5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <Button Width="40" Height="20">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <cal:ActionMessage MethodName="AddDrug">
+                                        <cal:Parameter Value="{Binding ElementName=ProductName}" />
+                                    </cal:ActionMessage>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Width="15" Height="15">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Addition .png" Stretch="UniformToFill" />
+                                    </Grid.Background>
+                                </Grid>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <DataGrid x:Name="ImportProducts"
+                          Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectedItem="{Binding SelectedImportProduct}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*"
+                                            Binding="{Binding BrandName}"
+                                            Header="Biệt dược" />
+                        <DataGridTextColumn Width="2*"
+                                            Binding="{Binding GenericDrug}"
+                                            Header="Hoạt chất" />
+                        <DataGridTextColumn Width="50"
+                                            Binding="{Binding Type}"
+                                            Header="Dạng" />
+                        <DataGridTextColumn Width="150"
+                                            Binding="{Binding Exp,
+                                                              StringFormat={}{0:dd/MM/yyyy}}"
+                                            Header="Hạn" />
+                        <DataGridTextColumn Width="100"
+                                            Binding="{Binding Quantity}"
+                                            Header="Số lượng nhập" />
+                        <DataGridTextColumn Width="100"
+                                            Binding="{Binding Price,
+                                                              StringFormat={}{0:C0}}"
+                                            Header="Giá" />
+
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <cal:ActionMessage MethodName="DeleteImportDrug" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <MenuItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid Width="20" Height="20">
+                                            <Grid.Background>
+                                                <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Garbage.png" Stretch="UniformToFill" />
+                                            </Grid.Background>
+                                        </Grid>
+                                        <TextBlock Margin="2,0"
+                                                   VerticalAlignment="Center"
+                                                   Text="Xóa" />
+                                    </StackPanel>
+                                </MenuItem.Header>
+                            </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

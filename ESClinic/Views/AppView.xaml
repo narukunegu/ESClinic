@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="ESClinic.Views.AppView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{DynamicResource AccordionBorderBrush}">
+            <Label x:Name="Username"
+                   Width="Auto"
+                   Height="Auto"
+                   Margin="0,0,50,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   FontWeight="Bold" />
+        </Grid>
+
+        <ContentControl x:Name="ActiveItem"
+                        Grid.Row="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" />
+        <StackPanel Grid.Row="2"
+                    Margin="0,0,0,15"
+                    HorizontalAlignment="Center"
+                    Background="{DynamicResource AccordionBorderBrush}"
+                    Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect BlurRadius="2"
+                                  Opacity="0.8"
+                                  Color="#FF272727" />
+            </StackPanel.Effect>
+            <Button x:Name="Home"
+                    Width="100"
+                    Height="100"
+                    Margin="20,5,5,5">
+                <Grid Width="75" Height="95">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/hospital-icon.png" Stretch="UniformToFill" />
+                        </Grid.Background>
+                    </Grid>
+                    <Label Grid.Row="1"
+                           Margin="0,5,0,5"
+                           HorizontalAlignment="Center"
+                           Content="Home" />
+                </Grid>
+            </Button>
+            <Button x:Name="Examine"
+                    Width="100"
+                    Height="100"
+                    Margin="5">
+                <Grid Width="75" Height="95">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/sthetoscope-icon.png" Stretch="Uniform" />
+                        </Grid.Background>
+                    </Grid>
+                    <Label Grid.Row="1"
+                           Margin="0,5,0,5"
+                           HorizontalAlignment="Center"
+                           Content="Khám bệnh" />
+                </Grid>
+
+            </Button>
+            <Button x:Name="Paid"
+                    Width="100"
+                    Height="100"
+                    Margin="5"
+                    Visibility="Hidden">
+                <Grid Width="75" Height="95">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/prescription-icon.png" Stretch="Uniform" />
+                        </Grid.Background>
+                    </Grid>
+                    <Label Grid.Row="1"
+                           Margin="0,5,0,5"
+                           HorizontalAlignment="Center"
+                           Content="Thanh toán" />
+                </Grid>
+
+            </Button>
+            <Button x:Name="Manage"
+                    Width="100"
+                    Height="100"
+                    Margin="5,5,20,5">
+                <Grid Width="75" Height="95">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/medkit-icon.png" Stretch="Uniform" />
+                        </Grid.Background>
+                    </Grid>
+                    <Label Grid.Row="1"
+                           Margin="0,5,0,5"
+                           HorizontalAlignment="Center"
+                           Content="Quản lí" />
+                </Grid>
+
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

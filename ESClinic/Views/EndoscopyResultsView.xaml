@@ -1,0 +1,22 @@
+﻿<Window x:Class="ESClinic.Views.EndoscopyResultsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:controls="clr-namespace:CodeReason.Reports.Controls;assembly=CodeReason.Reports"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="EndoscopyResultsView"
+        WindowState="Maximized">
+    <Grid>
+        <controls:BusyDecorator IsBusyIndicatorHidden="{Binding IsBusyHidden}">
+            <DocumentViewer x:Name="DocumentViewer">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <cal:ActionMessage MethodName="DocViewerLoaded">
+                            <cal:Parameter Value="{Binding ElementName=DocumentViewer}" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DocumentViewer>
+        </controls:BusyDecorator>
+    </Grid>
+</Window>

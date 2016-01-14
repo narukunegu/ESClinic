@@ -1,0 +1,179 @@
+﻿<UserControl x:Class="ESClinic.Views.ProductManageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"
+                   HorizontalAlignment="Right"
+                   Content="Biệt dược" />
+            <TextBox x:Name="BrandName"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Width="250"
+                     Margin="10,2"
+                     HorizontalAlignment="Left" />
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"
+                   HorizontalAlignment="Right"
+                   Content="Hoạt chất" />
+            <TextBox x:Name="GenericDrug"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Width="250"
+                     Margin="10,2"
+                     HorizontalAlignment="Left" />
+
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"
+                   HorizontalAlignment="Right"
+                   Content="Dạng" />
+            <TextBox x:Name="Type"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     Width="100"
+                     Margin="10,2"
+                     HorizontalAlignment="Left" />
+
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"
+                   HorizontalAlignment="Right"
+                   Content="Nhà sản xuất" />
+            <TextBox x:Name="Country"
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     Width="200"
+                     Margin="10,2"
+                     HorizontalAlignment="Left" />
+
+            <Label Grid.Row="4"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"
+                   HorizontalAlignment="Right"
+                   Content="Ngày hết hạn" />
+            <DatePicker Grid.Row="4"
+                        Grid.Column="1"
+                        Width="150"
+                        Margin="10,2"
+                        HorizontalAlignment="Left"
+                        SelectedDate="{Binding Exp,
+                                               StringFormat={}{0:dd/MM/yyyy}}" />
+
+            <StackPanel Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="10,2"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                <Button x:Name="AddProduct"
+                        Width="100"
+                        Height="40">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Width="20" Height="20">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Addition .png" Stretch="UniformToFill" />
+                            </Grid.Background>
+                        </Grid>
+                        <TextBlock Margin="2,0"
+                                   VerticalAlignment="Center"
+                                   Text="Thêm" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="Save"
+                        Width="100"
+                        Height="40"
+                        Margin="5,0,5,0"
+                        HorizontalAlignment="Right"
+                        ToolTip="Lưu mới dữ liệu toa thuốc">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Width="20" Height="20">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Save.png" Stretch="UniformToFill" />
+                            </Grid.Background>
+                        </Grid>
+                        <Label Margin="2,0"
+                               VerticalAlignment="Center"
+                               Content="Lưu" />
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+
+        <GroupBox Grid.Row="1" Header="Danh sách">
+            <DataGrid x:Name="Products"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      SelectedItem="{Binding SelectedProduct}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding ProductId}"
+                                        Header="Mã" />
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding BrandName}"
+                                        Header="Biệt dược" />
+                    <DataGridTextColumn Width="2*"
+                                        Binding="{Binding GenericDrug}"
+                                        Header="Hoạt chất" />
+                    <DataGridTextColumn Width="60"
+                                        Binding="{Binding Type}"
+                                        Header="Dạng" />
+                    <DataGridTextColumn Width="100"
+                                        Binding="{Binding Country}"
+                                        Header="Nhà sản xuất" />
+                    <DataGridTextColumn Width="120"
+                                        Binding="{Binding Exp,
+                                                          StringFormat={}{0:dd/MM/yyyy}}"
+                                        Header="Hạn" />
+                    <DataGridTextColumn Width="60"
+                                        Binding="{Binding Quantity}"
+                                        Header="Tồn kho" />
+                    <DataGridTextColumn Width="80"
+                                        Binding="{Binding Price,
+                                                          StringFormat={}{0:C0}}"
+                                        Header="Giá" />
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="DeleteDrug">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid Width="20" Height="20">
+                                        <Grid.Background>
+                                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Garbage.png" Stretch="UniformToFill" />
+                                        </Grid.Background>
+                                    </Grid>
+                                    <TextBlock Margin="2,0"
+                                               VerticalAlignment="Center"
+                                               Text="Xóa" />
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</UserControl>

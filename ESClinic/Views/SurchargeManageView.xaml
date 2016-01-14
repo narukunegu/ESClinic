@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="ESClinic.Views.SurchargeManageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"
+                   HorizontalAlignment="Right"
+                   Content="Phụ phí" />
+            <TextBox x:Name="Name"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Width="250"
+                     Margin="10,2"
+                     HorizontalAlignment="Left" />
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"
+                   HorizontalAlignment="Right"
+                   Content="Phí" />
+            <TextBox x:Name="Price"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Width="100"
+                     Margin="10,2"
+                     HorizontalAlignment="Left" />
+
+            <StackPanel Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="10,2"
+                        HorizontalAlignment="Left">
+                <Button x:Name="AddSurcharge"
+                        Width="100"
+                        Height="40">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Width="20" Height="20">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Addition .png" Stretch="UniformToFill" />
+                            </Grid.Background>
+                        </Grid>
+                        <TextBlock Margin="2,0"
+                                   VerticalAlignment="Center"
+                                   Text="Thêm" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <GroupBox Grid.Row="1" Header="Danh sách">
+            <DataGrid x:Name="Surcharges"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding Name}"
+                                        Header="Phụ phí" />
+                    <DataGridTextColumn Width="300"
+                                        Binding="{Binding Price,
+                                                          StringFormat={}{0:C0}}"
+                                        Header="Phí" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+
+</UserControl>

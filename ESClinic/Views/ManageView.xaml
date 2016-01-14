@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="ESClinic.Views.ManageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <Grid Background="{DynamicResource AccordionButtonBorderBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="{DynamicResource Brush03}" Orientation="Vertical">
+            <Button x:Name="ProductMenu" Height="50">
+                <StackPanel Orientation="Horizontal">
+                    <Grid Width="30" Height="30">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Medicine.png" Stretch="UniformToFill" />
+                        </Grid.Background>
+                    </Grid>
+                    <TextBlock Margin="2,0"
+                               VerticalAlignment="Center"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Text="Thuốc" />
+                </StackPanel>
+            </Button>
+            <StackPanel Margin="10,0,0,2"
+                        Orientation="Vertical"
+                        Visibility="{Binding ProductSubVisibility}">
+                <StackPanel.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </StackPanel.Resources>
+                <Button x:Name="InventoryManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Kho thuốc" />
+                <Button x:Name="ImportManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Nhập thuốc" />
+            </StackPanel>
+            <Button x:Name="OptionsMenu" Height="50">
+                <StackPanel Orientation="Horizontal">
+                    <Grid Width="30" Height="30">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/File Settings.png" Stretch="UniformToFill" />
+                        </Grid.Background>
+                    </Grid>
+                    <TextBlock Margin="2,0"
+                               VerticalAlignment="Center"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Text="Tùy chỉnh" />
+                </StackPanel>
+            </Button>
+            <StackPanel Margin="10,0,0,1"
+                        Orientation="Vertical"
+                        Visibility="{Binding OptionsSubVisibility}">
+                <StackPanel.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </StackPanel.Resources>
+                <Button x:Name="ServiceManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Thủ thuật" />
+                <Button x:Name="EndoscopyManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Nội soi" />
+                <Button x:Name="SurchargeManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Phụ phí" />
+            </StackPanel>
+
+            <Button x:Name="InfoMenu" Height="50">
+                <StackPanel Orientation="Horizontal">
+                    <Grid Width="30" Height="30">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/ESClinic;component/Resources/Icons/Identity - 02.png" Stretch="UniformToFill" />
+                        </Grid.Background>
+                    </Grid>
+                    <TextBlock Margin="2,0"
+                               VerticalAlignment="Center"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Text="Thông tin" />
+                </StackPanel>
+            </Button>
+            <StackPanel Margin="10,0,0,2"
+                        Orientation="Vertical"
+                        Visibility="{Binding InfoSubVisibility}">
+                <StackPanel.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </StackPanel.Resources>
+                <Button x:Name="PatientInfoManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Bệnh nhân" />
+                <Button x:Name="UserInfoManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Nhân viên" />
+                <Button x:Name="ClinicInfoManage"
+                        Height="40"
+                        HorizontalContentAlignment="Left"
+                        Content="Phòng khám" />
+            </StackPanel>
+        </StackPanel>
+
+        <ContentControl x:Name="ActiveItem"
+                        Grid.Column="1"
+                        Width="Auto"
+                        Height="Auto" />
+    </Grid>
+</UserControl>
